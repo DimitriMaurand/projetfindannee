@@ -1,10 +1,24 @@
 import './bootstrap.js';
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const boutonDeroulant = document.getElementById('boutonDeroulant');
+    const menuDeroulant = document.getElementById('menuDeroulant');
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    boutonDeroulant.addEventListener('click', () => {
+        menuDeroulant.classList.toggle('hidden');
+    });
+
+
+
+
+
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+});
+
 import './styles/app.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

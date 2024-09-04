@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class HomeController extends AbstractController
+class FontEntreeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/font/entree', name: 'app_font_entree')]
     public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+        return $this->render('font_entree/index.html.twig', [
+            'controller_name' => 'FontEntreeController',
         ]);
     }
 }

@@ -1,0 +1,35 @@
+<nav class="bg-white-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="hidden md:flex space-x-4 text-green-700 text-lg font-bold">
+            <a href="{{ path('app_home') }}" class="hover:text-gray-700">Accueil</a>
+
+            <div class="relative">
+                <button id="boutonDeroulant" class="text-green-700 hover:text-gray-700 flex items-center">
+                    Notre Carte
+                </button>
+                <div id="menuDeroulant" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                    <a class="block px-4 w-full py-2 text-sm text-gray-700 hover:bg-gray-200" href="{{ path('app_font_entree') }}">Entrée</a>
+                    <a class="block px-4 w-full py-2 text-sm text-gray-700 hover:bg-gray-200" href="{{ path('app_font_plat') }}">Plat</a>
+                    <a class="block px-4 w-full py-2 text-sm text-gray-700 hover:bg-gray-200" href="{{ path('app_font_dessert') }}">Dessert</a>
+                </div>
+            </div>
+            <a href="/font/menu" class="hover:text-gray-700">Menu</a>
+            <a href="{{ path('app_font_boisson') }}" class="hover:text-gray-700">Nos Boissons</a>
+            <a href="{{ path('app_font_vin') }}" class="hover:text-gray-700">Notre carte de vin</a>
+            <a href="{{ path('app_home') }}#form" class="hover:text-gray-700">Contact</a>
+        </div>
+        <div class="md:hidden">
+            <button id="mobileMenuButton" class="text-green-700 hover:text-gray-700">Menu</button>
+        </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden text-green-700">
+        <a href="{{ path('app_home') }}" class="hover:text-gray-700">Accueil</a>
+        <a href="{{ path('app_font_entree') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Entrée</a>
+        <a href="{{ path('app_font_plat') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Plat</a>
+        <a href="{{ path('app_font_dessert') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dessert</a>
+        <a href="{{ path('app_font_menu') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Menu</a>
+        <a href="{{ path('app_font_boisson') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Nos Boissons</a>
+        <a href="{{ path('app_font_vin') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Notre carte de vin</a>
+        <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Contact</a>
+    </div>
+</nav>
