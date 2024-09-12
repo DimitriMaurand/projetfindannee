@@ -3,7 +3,7 @@
 {% block title %}Hello FontEntreeController!{% endblock %}
 
 {% block body %}
-<main class="flex min-h-screen  flex-col items-center justify-between w-full p-24 bg-white">
+<main class=" min-h-screen  flex-col items-center justify-between w-full p-24 bg-white">
            {% include('includes/nav.html.twig') %} 
 
             <div class="bg-gray-50 w-full ">
@@ -15,20 +15,24 @@
                             <div class="relative h-80 w-full overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1  sm:h-64">
                                 <img src="https://images.unsplash.com/photo-1580638149300-65f0b9e8fbff?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="h-full w-full object-cover object-center" />
                             </div>
-                            <div class="m-4 transform hover:scale-105 transition-transform">
+                            {# <div class="m-4 transform hover:scale-105 transition-transform">
                                 <div class="flex justify-between font-bold  ">
                                     <h4>salade</h4>
                                     <h4>20€</h4>
                                 </div>
                                 <p class="text-base text-gray-900 ">ingredient</p>
-                            </div>
-                            <div class="m-4 transform hover:scale-105 transition-transform">
-                                <div class="flex justify-between font-bold ">
-                                    <h4>salade</h4>
-                                    <h4>20€</h4>
-                                </div>
-                                <p class="text-base text-gray-900 ">ingredient</p>
-                            </div>
+                            </div> #}
+                           {% for produit in produits %}
+                             {% if produit.disponible and produit.categorie.nom == 'entrée' %}
+                                <div class="m-4 transform hover:scale-105 transition-transform">
+                                     <div class="flex justify-between font-bold">
+                                        <h4>{{ produit.nom }}</h4>
+                                        <h4>{{ produit.prix }}€</h4>
+                                    </div>
+                                     <p class="text-base text-gray-900">{{ produit.composition }}</p>
+                                    </div>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

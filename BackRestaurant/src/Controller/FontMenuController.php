@@ -2,17 +2,22 @@
 
 namespace App\Controller;
 
+use App\Repository\MenuRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class FontMenuController extends AbstractController
 {
-    #[Route('/font/menu', name: 'app_font_menu')]
-    public function index(): Response
+    #[Route('/menu', name: 'app_font_menu')]
+    public function index(MenuRepository $menuRepository, SerializerInterface $serizlize): Response
     {
+        $menu = $menuRepository->findAll();
+        $data = $serizlize->serialize($menu, 'json', ['groups' => 'menu']);
         return $this->render('font_menu/index.html.twig', [
-            'controller_name' => 'FontMenuController',
+
+            'menus' => $menuRepository->findAll(),
         ]);
     }
 }

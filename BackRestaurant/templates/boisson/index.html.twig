@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boisson index{% endblock %}
+
+{% block body %}
+    <h2 class="text-xl font-bold text-center m-4">Boisson index</h2>
+
+    <table class="table min-w-full text-left text-sm whitespace-nowrap">
+        <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
+            <tr>
+                <th scope="col" class="px-6 py-4">Id</th>
+                <th scope="col" class="px-6 py-4">Nom</th>
+                <th scope="col" class="px-6 py-4">Appelation</th>
+                <th scope="col" class="px-6 py-4">Annee</th>
+                <th scope="col" class="px-6 py-4">Composition</th>
+                <th scope="col" class="px-6 py-4">Volume</th>
+                <th scope="col" class="px-6 py-4">Prix</th>
+                <th scope="col" class="px-6 py-4">Est Alcolisee</th>
+                <th scope="col" class="px-6 py-4">Disponible</th>
+                <th scope="col" class="px-6 py-4">Catégprie</th>
+                <th scope="col" class="px-6 py-4">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for boisson in boissons %}
+            <tr class="border-b dark:border-neutral-600">
+                <td scope="row" class="px-6 py-4">{{ boisson.id }}</td>
+                <td scope="row" class="px-6 py-4">{{ boisson.nom }}</td>
+                <td scope="row" class="px-6 py-4">{{ boisson.appelation }}</td>
+                <td scope="row" class="px-6 py-4">{{ boisson.annee }}</td>
+                <td scope="row" class="px-6 py-4">{{ boisson.composition }}</td>
+                <td scope="row" class="px-6 py-4">{{ boisson.volume }}</td>
+                <td scope="row" class="px-6 py-4">{{ boisson.prix }}</td>
+                <td scope="row" class="px-6 py-4">{{ boisson.estAlcolisee ? 'Yes' : 'No' }}</td>
+                 <td scope="row" class="px-6 py-4">
+                    {{ boisson.categorieBoisson.nom }}
+                </td>
+                <td scope="row" class="px-6 py-4">{{ boisson.disponible ? 'Yes' : 'No' }}</td>
+                <td scope="row" class="px-6 py-4">
+                    <a href="{{ path('app_boisson_show', {'id': boisson.id}) }}"><button class="btn w-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-2 m-2 rounded-md">show</button></a>
+                    <a href="{{ path('app_boisson_edit', {'id': boisson.id}) }}"><button class="btn w-20 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-2 m-2 rounded-md">editer</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_boisson_new') }}"><button  class=" m-2 w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md"> Creer un message</button></a>
+    <a href="{{ path('app_admin') }}"><button  class="  w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md"> Retour</button></a>
+
+{% endblock %}

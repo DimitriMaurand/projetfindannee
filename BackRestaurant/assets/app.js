@@ -1,24 +1,27 @@
-import './bootstrap.js';
+// Import des styles pour compilation.
+import "./bootstrap.js";
+import "./styles/app.css";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const boutonDeroulant = document.getElementById('boutonDeroulant');
-    const menuDeroulant = document.getElementById('menuDeroulant');
-    const menuButton = document.getElementById('menuButton');
-    const mobileMenu = document.getElementById('mobileMenu');
+// Fonction pour attacher les événements aux boutons déroulants
+function attachEventListeners() {
+    const boutonsDeroulants = document.getElementsByClassName("boutonDeroulant");
 
-    boutonDeroulant.addEventListener('click', () => {
-        menuDeroulant.classList.toggle('hidden');
-    });
+    for (let index = 0; index < boutonsDeroulants.length; index++) {
+        boutonsDeroulants[index].addEventListener("click", () => {
+            const menuDeroulantDuBouton =
+                boutonsDeroulants[index].getElementsByClassName("menuDeroulant");
 
+            toggleMenuDeroulant(menuDeroulantDuBouton[0]);
+        });
+    }
+}
 
+// Fonction pour ouvrir/fermer les menus déroulants
+function toggleMenuDeroulant(menu) {
+    menu.classList.toggle("hidden");
+}
 
-
-
-    menuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
+// Appeler après chaque navigation via Turbo
+document.addEventListener("turbo:load", () => {
+    attachEventListeners();
 });
-
-import './styles/app.css';
-
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

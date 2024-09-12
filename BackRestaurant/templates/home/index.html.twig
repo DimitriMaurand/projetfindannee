@@ -5,7 +5,7 @@
 {% block body %}
 
 
-<main class="flex min-h-screen  flex-col items-center justify-between w-full p-24 bg-white">
+<main class=" min-h-screen  flex-col items-center justify-between w-full p-24 bg-white">
              {% include('includes/nav.html.twig') %}
             <div class="bg-gray-50 ">
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -25,30 +25,30 @@
                         <section class="mt-4 bg-white rounded-lg shadow-lg p-4">
                             <h2 class="text-2xl m-4  text-green-700 font-semibold text-center">Notre Carte</h2>
                             <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-                                <button  class="">
+                                <button  class="w-full">
                                     <div class="group relative  bg-white rounded-lg shadow-lg p-4 transform hover:scale-105 transition-transform mb-6">
                                         <h3 class=" text-2xl text-green-700 text-center font-semibold m-4">Entrée</h3>
                                         <div class="relative h-80 w-full overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1  sm:h-64">
-                                            <img src="https://images.unsplash.com/photo-1580638149300-65f0b9e8fbff?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="h-full w-full object-cover object-center" />
+                                            <img src="https://images.unsplash.com/photo-1580638149300-65f0b9e8fbff?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="une entree" class="h-full w-full object-cover object-center" />
                                         </div>
 
                                     </div>
                                 </button>
 
-                                <button  class="">
+                                <button  class="w-full">
                                     <div class="group relative  bg-white rounded-lg shadow-lg p-4 transform hover:scale-105 transition-transform mb-6">
                                         <h3 class=" text-2xl text-green-700 text-center font-semibold m-4">Plats</h3>
                                         <div class="relative h-80 w-full overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1  sm:h-64">
-                                            <img src="https://images.unsplash.com/photo-1464093515883-ec948246accb?q=80&w=2659&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="h-full w-full object-cover object-center" />
+                                            <img src="https://images.unsplash.com/photo-1464093515883-ec948246accb?q=80&w=2659&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="un plat" class="h-full w-full object-cover object-center" />
                                         </div>
                                     </div>
                                 </button>
 
-                                <button  class="">
+                                <button  class="w-full">
                                     <div class="group relative  bg-white rounded-lg shadow-lg p-4 transform hover:scale-105 transition-transform mb-6">
                                         <h3 class=" text-2xl text-green-700 text-center font-semibold m-4">Fromage et Dessert</h3>
                                         <div class="relative h-80 w-full overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1  sm:h-64">
-                                            <img src="https://images.unsplash.com/photo-1625944526412-89403327825d?q=80&w=2695&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="h-full w-full object-cover object-center" />
+                                            <img src="https://images.unsplash.com/photo-1625944526412-89403327825d?q=80&w=2695&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="un dessert" class="h-full w-full object-cover object-center" />
                                         </div>
 
                                     </div>
@@ -63,7 +63,7 @@
                                     <div class="group relative  bg-white rounded-lg shadow-lg p-4 transform hover:scale-105 transition-transform mb-6">
 
                                         <div class="relative h-80 w-full overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1  sm:h-64">
-                                            <img src="https://plus.unsplash.com/premium_photo-1680158492794-79896e951487?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="h-full w-full object-cover object-center" />
+                                            <img src="https://plus.unsplash.com/premium_photo-1680158492794-79896e951487?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="plusieurs plats sur la table" class="h-full w-full object-cover object-center" />
                                         </div>
                                     </div>
                                 </button>
@@ -71,23 +71,23 @@
                         </section>
                         {# {/* boisson */} #}
                         <section class="mt-4 bg-white rounded-lg shadow-lg p-4">
-                            <h2 class="text-2xl m-4  text-green-700 font-semibold text-center">Nos Boisson</h2>
+                            <h2 class="text-2xl m-4  text-green-700 font-semibold text-center">Notre carte de Boisson</h2>
                             <div>
 
                                 <button  class="w-full">
                                     <div class="group relative  bg-white rounded-lg shadow-lg p-4 transform hover:scale-105 transition-transform mb-6">
-                                        <h3 class=" text-2xl text-green-700 text-center font-semibold m-4">Aperitifs</h3>
+                                        <h3 class=" text-2xl text-green-700 text-center font-semibold m-4">Nos boissons</h3>
                                         <div class="relative h-80 w-full overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1  sm:h-64">
-                                            <img src="https://plus.unsplash.com/premium_photo-1663047175170-44256eac4189?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="h-full w-full object-cover object-center" />
+                                            <img src="https://plus.unsplash.com/premium_photo-1663047175170-44256eac4189?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="personne qui trinque a l'apéritif" class="h-full w-full object-cover object-center" />
                                         </div>
                                     </div>
                                 </button>
 
                                 <button  class="w-full">
                                     <div class="group relative  bg-white rounded-lg shadow-lg p-4 transform hover:scale-105 transition-transform mb-6">
-                                        <h3 class=" text-2xl text-green-700 text-center font-semibold m-4">Carte des Vins</h3>
+                                        <h3 class=" text-2xl text-green-700 text-center font-semibold m-4">Notre Carte des Vins</h3>
                                         <div class="relative h-80 w-full overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1  sm:h-64">
-                                            <img src="https://images.unsplash.com/photo-1600320183466-7198f22d3c8a?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="h-full w-full object-cover object-center" />
+                                            <img src="https://images.unsplash.com/photo-1600320183466-7198f22d3c8a?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image d'une bouteille de vin avec un verre" class="h-full w-full object-cover object-center" />
                                         </div>
 
                                     </div>
