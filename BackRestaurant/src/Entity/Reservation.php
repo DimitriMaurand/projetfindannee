@@ -6,7 +6,6 @@ use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
@@ -33,13 +32,8 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateEnvoi = null;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $rgpdAcceptedAt;
-
-    // #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    // private ?\DateTimeInterface $rgpd = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $rgpd = null;
 
     public function getId(): ?int
     {
@@ -118,29 +112,15 @@ class Reservation
         return $this;
     }
 
-    // public function getRgpd(): ?\DateTimeInterface
-    // {
-    //     return $this->rgpd;
-    // }
-
-
-
-    // RGPD Accepted At
-    public function getRgpdAcceptedAt(): ?\DateTimeInterface
+    public function getRgpd(): ?\DateTimeInterface
     {
-        return $this->rgpdAcceptedAt;
+        return $this->rgpd;
     }
 
-    public function setRgpdAcceptedAt(?\DateTimeInterface $rgpdAcceptedAt): self
+    public function setRgpd(\DateTimeInterface $rgpd): static
     {
-        $this->rgpdAcceptedAt = $rgpdAcceptedAt;
+        $this->rgpd = $rgpd;
 
         return $this;
     }
-    // public function setRgpd(\DateTimeInterface $rgpd): static
-    // {
-    //     $this->rgpd = $rgpd;
-
-    //     return $this;
-    // }
 }

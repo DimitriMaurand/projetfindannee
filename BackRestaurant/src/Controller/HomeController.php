@@ -20,6 +20,22 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $Reservation->setDateEnvoi(new \DateTime());
+            $data = $request->request->all();
+            // dd($request->request->all());
+            $rgpdChecked = $data['reservation']['rgpd'] ?? null;
+            // Vérification si la case RGPD a été cochée et définir la date d'acceptation RGPD
+
+            if ($rgpdChecked == 1) {
+                $Reservation->setRgpd(new \DateTime());
+                // dd($Reservation, 1);
+            } else {
+                // dd($Reservation, 0);
+                $this->addFlash('error', 'Vous devez accepter les conditions RGPD pour continuer.');
+                return $this->redirectToRoute('app_home');
+            }
+
             $entityManager->persist($Reservation);
             $entityManager->flush();
 

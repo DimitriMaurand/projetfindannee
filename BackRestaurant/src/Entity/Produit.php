@@ -16,7 +16,6 @@ class Produit
     #[ORM\GeneratedValue]
     #[ORM\Column]
     #[Groups(['prod'])]
-
     private ?int $id = null;
 
     #[ORM\Column(length: 70)]
@@ -29,12 +28,6 @@ class Produit
 
     #[ORM\Column(type: 'float')]
     #[Groups(['prod'])]
-
-    // #[Assert\Type(type: 'float')]
-    // #[Assert\Regex(
-    //     pattern: '/^\d+(\.\d{1,2})?$/',
-    //     message: 'Le prix doit avoir au maximum deux chiffres après la virgule.'
-    // )]
     private ?float $prix = null;
 
     #[ORM\Column]
@@ -44,7 +37,6 @@ class Produit
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['prod'])]
-
     private ?CategorieProduit $categorie = null;
 
     /**
@@ -57,17 +49,12 @@ class Produit
      * @var Collection<int, Allergene>
      */
     #[ORM\ManyToMany(targetEntity: Allergene::class, inversedBy: 'produits')]
-    private Collection $ProduitAllergene;
-
-
-
-
-
+    private Collection $allergenes; // Correction du nom de la propriété
 
     public function __construct()
     {
         $this->menus = new ArrayCollection();
-        $this->ProduitAllergene = new ArrayCollection();
+        $this->allergenes = new ArrayCollection(); // Correction du nom de la propriété
     }
 
     public function getId(): ?int
@@ -83,7 +70,6 @@ class Produit
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -95,7 +81,6 @@ class Produit
     public function setComposition(string $composition): static
     {
         $this->composition = $composition;
-
         return $this;
     }
 
@@ -104,10 +89,9 @@ class Produit
         return $this->prix;
     }
 
-    public function setPrix(int $prix): static
+    public function setPrix(float $prix): static
     {
         $this->prix = $prix;
-
         return $this;
     }
 
@@ -119,7 +103,6 @@ class Produit
     public function setDisponible(bool $disponible): static
     {
         $this->disponible = $disponible;
-
         return $this;
     }
 
@@ -131,7 +114,6 @@ class Produit
     public function setCategorie(?CategorieProduit $categorie): static
     {
         $this->categorie = $categorie;
-
         return $this;
     }
 
@@ -149,7 +131,6 @@ class Produit
             $this->menus->add($menu);
             $menu->addMenuProduit($this);
         }
-
         return $this;
     }
 
@@ -158,31 +139,28 @@ class Produit
         if ($this->menus->removeElement($menu)) {
             $menu->removeMenuProduit($this);
         }
-
         return $this;
     }
 
     /**
      * @return Collection<int, Allergene>
      */
-    public function getProduitAllergene(): Collection
+    public function getAllergenes(): Collection
     {
-        return $this->ProduitAllergene;
+        return $this->allergenes; // Correction du nom de la méthode
     }
 
-    public function addProduitAllergene(Allergene $produitAllergene): static
+    public function addAllergene(Allergene $allergene): static
     {
-        if (!$this->ProduitAllergene->contains($produitAllergene)) {
-            $this->ProduitAllergene->add($produitAllergene);
+        if (!$this->allergenes->contains($allergene)) {
+            $this->allergenes->add($allergene);
         }
-
         return $this;
     }
 
-    public function removeProduitAllergene(Allergene $produitAllergene): static
+    public function removeAllergene(Allergene $allergene): static
     {
-        $this->ProduitAllergene->removeElement($produitAllergene);
-
+        $this->allergenes->removeElement($allergene);
         return $this;
     }
 }
