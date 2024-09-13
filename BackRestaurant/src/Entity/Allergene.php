@@ -21,21 +21,24 @@ class Allergene
     #[Groups(['prod'])]
     private ?string $nom = null;
 
-    /**
-     * @var Collection<int, produit>
-     */
-    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'allergenes')]
-    private Collection $produitAllergene;
+
     /**
      * @var Collection<int, boisson>
      */
     #[ORM\ManyToMany(targetEntity: boisson::class, inversedBy: 'allergenes')]
     private Collection $boisson;
 
+    /**
+     * @var Collection<int, Produit>
+     */
+    #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'ProduitAllergene')]
+    private Collection $produits;
+
     public function __construct()
     {
-        $this->produitAllergene = new ArrayCollection();
+
         $this->boisson = new ArrayCollection();
+        $this->produits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,29 +58,11 @@ class Allergene
         return $this;
     }
 
-    /**
-     * @return Collection<int, produit>
-     */
-    public function getProduitAllergene(): Collection
-    {
-        return $this->produitAllergene;
-    }
 
-    public function addProduitAllergene(produit $produitAllergene): static
-    {
-        if (!$this->produitAllergene->contains($produitAllergene)) {
-            $this->produitAllergene->add($produitAllergene);
-        }
 
-        return $this;
-    }
 
-    public function removeProduitAllergene(produit $produitAllergene): static
-    {
-        $this->produitAllergene->removeElement($produitAllergene);
 
-        return $this;
-    }
+
 
     /**
      * @return Collection<int, boisson>
@@ -99,6 +84,33 @@ class Allergene
     public function removeBoisson(boisson $boisson): static
     {
         $this->boisson->removeElement($boisson);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): static
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits->add($produit);
+            $produit->addProduitAllergene($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): static
+    {
+        if ($this->produits->removeElement($produit)) {
+            $produit->removeProduitAllergene($this);
+        }
 
         return $this;
     }

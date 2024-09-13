@@ -10,9 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/admin/menu')]
+#[IsGranted('ROLE_USER', message: "Tu n'as rien à faire là.")]
 final class MenuController extends AbstractController
 {
     #[Route(name: 'app_menu_index', methods: ['GET'])]

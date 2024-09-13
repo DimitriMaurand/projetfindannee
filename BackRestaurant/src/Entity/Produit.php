@@ -56,9 +56,10 @@ class Produit
     /**
      * @var Collection<int, Allergene>
      */
-    #[ORM\ManyToMany(targetEntity: Allergene::class, mappedBy: 'produitAllergene')]
+    #[ORM\ManyToMany(targetEntity: Allergene::class, inversedBy: 'produits')]
+    private Collection $ProduitAllergene;
 
-    private Collection $allergenes;
+
 
 
 
@@ -66,7 +67,7 @@ class Produit
     public function __construct()
     {
         $this->menus = new ArrayCollection();
-        $this->allergenes = new ArrayCollection();
+        $this->ProduitAllergene = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,26 +165,23 @@ class Produit
     /**
      * @return Collection<int, Allergene>
      */
-    public function getAllergenes(): Collection
+    public function getProduitAllergene(): Collection
     {
-        return $this->allergenes;
+        return $this->ProduitAllergene;
     }
 
-    public function addAllergene(Allergene $allergene): static
+    public function addProduitAllergene(Allergene $produitAllergene): static
     {
-        if (!$this->allergenes->contains($allergene)) {
-            $this->allergenes->add($allergene);
-            $allergene->addProduitAllergene($this);
+        if (!$this->ProduitAllergene->contains($produitAllergene)) {
+            $this->ProduitAllergene->add($produitAllergene);
         }
 
         return $this;
     }
 
-    public function removeAllergene(Allergene $allergene): static
+    public function removeProduitAllergene(Allergene $produitAllergene): static
     {
-        if ($this->allergenes->removeElement($allergene)) {
-            $allergene->removeProduitAllergene($this);
-        }
+        $this->ProduitAllergene->removeElement($produitAllergene);
 
         return $this;
     }

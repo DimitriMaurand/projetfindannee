@@ -10,11 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin/allergene')]
+#[IsGranted('ROLE_USER', message: "Tu n'as rien à faire là.")]
 final class AllergeneController extends AbstractController
 {
     #[Route(name: 'app_allergene_index', methods: ['GET'])]
+
     public function index(AllergeneRepository $allergeneRepository): Response
     {
         return $this->render('allergene/index.html.twig', [
