@@ -9,22 +9,20 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/admin/boisson')]
 #[IsGranted('ROLE_USER', message: "Tu n'as rien à faire là.")]
 final class BoissonController extends AbstractController
 {
     #[Route(name: 'app_boisson_index', methods: ['GET'])]
-    public function index(BoissonRepository $boissonRepository, SerializerInterface $serizlize): Response
+    public function index(BoissonRepository $boissonRepository): Response
     {
-        $boisson = $boissonRepository->findAll();
+        $boissons = $boissonRepository->findAll();
 
-        $data = $serizlize->serialize($boisson, 'json', ['groups' => 'boisson']);
         return $this->render('boisson/index.html.twig', [
-            'boissons' => $boissonRepository->findAll(),
+            'boissons' => $boissons,
         ]);
     }
 
@@ -44,7 +42,7 @@ final class BoissonController extends AbstractController
 
         return $this->render('boisson/new.html.twig', [
             'boisson' => $boisson,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -70,14 +68,14 @@ final class BoissonController extends AbstractController
 
         return $this->render('boisson/edit.html.twig', [
             'boisson' => $boisson,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_boisson_delete', methods: ['POST'])]
     public function delete(Request $request, Boisson $boisson, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $boisson->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $boisson->getId(), $request->request->get('_token'))) {
             $entityManager->remove($boisson);
             $entityManager->flush();
         }

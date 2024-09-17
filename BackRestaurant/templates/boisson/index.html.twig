@@ -18,6 +18,7 @@
                 <th scope="col" class="px-6 py-4">Est Alcolisee</th>
                 <th scope="col" class="px-6 py-4">Disponible</th>
                 <th scope="col" class="px-6 py-4">Catégprie</th>
+                <th scope="col" class="px-6 py-4">Allergène</th>
                 <th scope="col" class="px-6 py-4">actions</th>
             </tr>
         </thead>
@@ -37,19 +38,25 @@
                 </td>
                 <td scope="row" class="px-6 py-4">{{ boisson.disponible ? 'Yes' : 'No' }}</td>
                 <td scope="row" class="px-6 py-4">
-                    <a href="{{ path('app_boisson_show', {'id': boisson.id}) }}"><button class="btn w-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-2 m-2 rounded-md">show</button></a>
+                {% for allergene in boisson.allergenes %}
+            <p>{{ allergene.nom }}</p>
+        {% else %}
+            <p>Aucun allergène</p>
+        {% endfor %}
+                <td scope="row" class="px-6 py-4">
+                    <a href="{{ path('app_boisson_show', {'id': boisson.id}) }}"><button class="btn w-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-2 m-2 rounded-md">supprimer</button></a>
                     <a href="{{ path('app_boisson_edit', {'id': boisson.id}) }}"><button class="btn w-20 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-2 m-2 rounded-md">editer</button></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">rien de créer</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_boisson_new') }}"><button  class=" m-2 w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md"> Creer un message</button></a>
+    <a href="{{ path('app_boisson_new') }}"><button  class=" m-2 w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md"> Créer une boisson</button></a>
     <a href="{{ path('app_admin_accueil') }}"><button  class="  w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md"> Retour</button></a>
 
 {% endblock %}

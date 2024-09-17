@@ -12,33 +12,33 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Allergene
 {
     #[ORM\Id]
-    #[Groups(['prod'])]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['prod', 'allergene'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 70)]
-    #[Groups(['prod'])]
+    #[Groups(['prod', 'allergene'])]
     private ?string $nom = null;
-
-
-    /**
-     * @var Collection<int, boisson>
-     */
-    #[ORM\ManyToMany(targetEntity: boisson::class, inversedBy: 'allergenes')]
-    private Collection $boisson;
 
     /**
      * @var Collection<int, Produit>
      */
-    #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'ProduitAllergene')]
+    #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'allergenes')]
+    #[Groups(['allergene'])]
     private Collection $produits;
+
+    /**
+     * @var Collection<int, Boisson>
+     */
+    #[ORM\ManyToMany(targetEntity: Boisson::class, mappedBy: 'allergenes')]
+    #[Groups(['allergene'])]
+    private Collection $boissons;
 
     public function __construct()
     {
-
-        $this->boisson = new ArrayCollection();
         $this->produits = new ArrayCollection();
+        $this->boissons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,37 +54,6 @@ class Allergene
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-
-
-
-
-
-
-    /**
-     * @return Collection<int, boisson>
-     */
-    public function getBoisson(): Collection
-    {
-        return $this->boisson;
-    }
-
-    public function addBoisson(boisson $boisson): static
-    {
-        if (!$this->boisson->contains($boisson)) {
-            $this->boisson->add($boisson);
-        }
-
-        return $this;
-    }
-
-    public function removeBoisson(boisson $boisson): static
-    {
-        $this->boisson->removeElement($boisson);
-
         return $this;
     }
 
@@ -100,18 +69,41 @@ class Allergene
     {
         if (!$this->produits->contains($produit)) {
             $this->produits->add($produit);
-            $produit->addProduitAllergene($this);
+            $produit->addAllergene($this);
         }
-
         return $this;
     }
 
     public function removeProduit(Produit $produit): static
     {
         if ($this->produits->removeElement($produit)) {
-            $produit->removeProduitAllergene($this);
+            $produit->removeAllergene($this);
         }
+        return $this;
+    }
 
+    /**
+     * @return Collection<int, Boisson>
+     */
+    public function getBoissons(): Collection
+    {
+        return $this->boissons;
+    }
+
+    public function addBoisson(Boisson $boisson): static
+    {
+        if (!$this->boissons->contains($boisson)) {
+            $this->boissons->add($boisson);
+            $boisson->addAllergene($this);
+        }
+        return $this;
+    }
+
+    public function removeBoisson(Boisson $boisson): static
+    {
+        if ($this->boissons->removeElement($boisson)) {
+            $boisson->removeAllergene($this);
+        }
         return $this;
     }
 }

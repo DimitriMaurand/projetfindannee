@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Attribute\Groups as AttributeGroups;
 
 #[ORM\Entity(repositoryClass: BoissonRepository::class)]
 class Boisson
@@ -53,10 +52,11 @@ class Boisson
     /**
      * @var Collection<int, Allergene>
      */
-    #[ORM\ManyToMany(targetEntity: Allergene::class, mappedBy: 'boisson')]
+    #[ORM\ManyToMany(targetEntity: Allergene::class, inversedBy: 'boissons')]
+    #[Groups(['boisson'])]
     private Collection $allergenes;
 
-    #[ORM\ManyToOne(inversedBy: 'acategorieboisson')]
+    #[ORM\ManyToOne(inversedBy: 'boissons')]
     private ?CategorieBoisson $categorieBoisson = null;
 
     public function __construct()
@@ -77,7 +77,6 @@ class Boisson
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -89,7 +88,6 @@ class Boisson
     public function setAppelation(?string $appelation): static
     {
         $this->appelation = $appelation;
-
         return $this;
     }
 
@@ -101,7 +99,6 @@ class Boisson
     public function setAnnee(?int $annee): static
     {
         $this->annee = $annee;
-
         return $this;
     }
 
@@ -113,7 +110,6 @@ class Boisson
     public function setComposition(string $composition): static
     {
         $this->composition = $composition;
-
         return $this;
     }
 
@@ -125,7 +121,6 @@ class Boisson
     public function setVolume(int $volume): static
     {
         $this->volume = $volume;
-
         return $this;
     }
 
@@ -137,7 +132,6 @@ class Boisson
     public function setPrix(float $prix): static
     {
         $this->prix = $prix;
-
         return $this;
     }
 
@@ -149,7 +143,6 @@ class Boisson
     public function setEstAlcolisee(bool $estAlcolisee): static
     {
         $this->estAlcolisee = $estAlcolisee;
-
         return $this;
     }
 
@@ -161,7 +154,6 @@ class Boisson
     public function setDisponible(bool $disponible): static
     {
         $this->disponible = $disponible;
-
         return $this;
     }
 
@@ -179,7 +171,6 @@ class Boisson
             $this->allergenes->add($allergene);
             $allergene->addBoisson($this);
         }
-
         return $this;
     }
 
@@ -188,7 +179,6 @@ class Boisson
         if ($this->allergenes->removeElement($allergene)) {
             $allergene->removeBoisson($this);
         }
-
         return $this;
     }
 
@@ -200,7 +190,6 @@ class Boisson
     public function setCategorieBoisson(?CategorieBoisson $categorieBoisson): static
     {
         $this->categorieBoisson = $categorieBoisson;
-
         return $this;
     }
 }

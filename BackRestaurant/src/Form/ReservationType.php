@@ -33,18 +33,12 @@ class ReservationType extends AbstractType
                 'attr' => ['rows' => '10', 'class' => 'block w-full row-20 mb-4 mt-2 rounded-md border-0 py-1.5 text-gray-900 shadow ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'],
 
             ])
-            // ->add('dateEnvoi', null, [
-            //     'widget' => 'single_text',
-            //     'attr' => ['class' => 'form-input mt-1 block w-full mb-4 mt-2'],
-            // ])
-            // ->add('rgpd', null, [
-            //     'widget' => 'single_text',
-            //     'attr' => ['class' => 'form-input mt-1 block w-full mb-4 mt-2'],
-            // ])
+
             ->add('rgpd', CheckboxType::class, [
-                'label' => 'J’accepte les conditions RGPD',  // Le texte à afficher à côté de la case
-                'required' => true,  // Cette case est obligatoire
-                'mapped' => false,   // Si vous ne voulez pas la stocker directement dans l'entité
+                'label' => 'J’accepte les conditions RGPD',
+                'required' => true,
+                'mapped' => false,
+                'attr' => ['class' => 'ml-4']
             ]);;
     }
 

@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
@@ -39,22 +38,18 @@ class Produit
     #[Groups(['prod'])]
     private ?CategorieProduit $categorie = null;
 
-    /**
-     * @var Collection<int, Menu>
-     */
     #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'menuProduit')]
     private Collection $menus;
 
-    /**
-     * @var Collection<int, Allergene>
-     */
     #[ORM\ManyToMany(targetEntity: Allergene::class, inversedBy: 'produits')]
-    private Collection $allergenes; // Correction du nom de la propriété
+    #[ORM\JoinTable(name: 'produit_allergene')] // Optionnel pour préciser le nom de la table
+    #[Groups(['prod', 'allergene'])]  // Ajout du groupe pour la sérialisation
+    private Collection $allergenes;
 
     public function __construct()
     {
         $this->menus = new ArrayCollection();
-        $this->allergenes = new ArrayCollection(); // Correction du nom de la propriété
+        $this->allergenes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,20 +142,23 @@ class Produit
      */
     public function getAllergenes(): Collection
     {
-        return $this->allergenes; // Correction du nom de la méthode
+        return $this->allergenes;
     }
 
     public function addAllergene(Allergene $allergene): static
     {
         if (!$this->allergenes->contains($allergene)) {
             $this->allergenes->add($allergene);
+            $allergene->addProduit($this); // Mise à jour de la relation bidirectionnelle
         }
         return $this;
     }
 
     public function removeAllergene(Allergene $allergene): static
     {
-        $this->allergenes->removeElement($allergene);
+        if ($this->allergenes->removeElement($allergene)) {
+            $allergene->removeProduit($this); // Mise à jour de la relation bidirectionnelle
+        }
         return $this;
     }
 }

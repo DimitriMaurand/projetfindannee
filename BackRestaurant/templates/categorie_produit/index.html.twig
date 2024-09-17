@@ -19,19 +19,19 @@
                 <td scope="row" class="px-6 py-4">{{ categorie_produit.id }}</td>
                 <td scope="row" class="px-6 py-4">{{ categorie_produit.nom }}</td>
                 <td scope="row" class="px-6 py-4">
-                    <a href="{{ path('app_categorie_produit_show', {'id': categorie_produit.id}) }}"><button class="btn w-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-2 m-2 rounded-md">show</button></a>
+                    <a href="{{ path('app_categorie_produit_show', {'id': categorie_produit.id}) }}"><button class="btn w-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-2 m-2 rounded-md">supprimer</button></a>
                     <a href="{{ path('app_categorie_produit_edit', {'id': categorie_produit.id}) }}"><button class="btn w-20 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-2 m-2 rounded-md">editer</button></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">rien de créer</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_categorie_produit_new') }}"><button  class="m-2  w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md"> Creer un message</button></a>
+    <a href="{{ path('app_categorie_produit_new') }}"><button  class="m-2  w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md"> Créer un produit</button></a>
     <a href="{{ path('app_admin_accueil') }}"><button  class="  w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md"> Retour</button></a>
 
 {% endblock %}
